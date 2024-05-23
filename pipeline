@@ -1,0 +1,68 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Checking out the repository'
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'tesis2finalEsteSi', url: 'https://github.com/SergioAyalaHernandez/clasificador-back-front-db']])
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                echo 'Building Docker image'
+                script {
+                    echo "The value of env.WORKSPACE is: ${env.WORKSPACE}"
+                    bat """
+                    dir
+                    tree
+                    docker-compose -f ${env.WORKSPACE}/docker-compose.yml build --no-cache
+                    """
+                }
+            }
+        }
+        stage('Deploy with Docker Compose') {
+            steps {
+                echo 'Deploying the application with Docker Compose'
+                script {
+                    bat """
+                    docker-compose -f ${env.WORKSPACE}/docker-compose.yml up -d
+                    """
+                }
+            }
+        }
+        stage('Set data en data base') {
+            steps {
+                echo 'Deploying the application with Docker Compose'
+                script {
+                    bat """
+                    docker-compose -f ${env.WORKSPACE}/docker-compose.yml up -d
+                    """
+                    // Verificar si el contenedor de MySQL está en ejecución
+                    def containerStatus = bat(script: 'docker ps -f "name=pipeline-java-docker-db-1" --format "{{.Status}}"', returnStdout: true).trim()
+                    if (containerStatus.contains("Up")) {
+                        echo "MySQL container is running. Proceeding with data insertion."
+                        bat 'ping 127.0.0.1 -n 121 > nul'
+                        bat """
+                        docker exec -i pipeline-java-docker-db-1 mysql -uroot -p920808Ser. euclidiana < ${env.WORKSPACE}/init-db.sql
+                        """
+                    } else {
+                        error "MySQL container is not running. Aborting data insertion."
+                    }
+                }
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Cleaning up workspace'
+            cleanWs()
+        }
+        success {
+            echo 'Pipeline completed successfully'
+        }
+        failure {
+            echo 'Pipeline failed'
+        }
+    }
+}

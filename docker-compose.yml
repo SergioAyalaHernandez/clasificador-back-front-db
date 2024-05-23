@@ -9,6 +9,7 @@ services:
       - "3308:3306"
     networks:
       - my_network
+    command: ["sh", "-c", "sleep 120 && docker-entrypoint.sh mysqld"]
 
   app:
     build:
