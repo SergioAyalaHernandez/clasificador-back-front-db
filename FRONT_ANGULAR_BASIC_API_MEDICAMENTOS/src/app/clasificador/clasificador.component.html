@@ -1,0 +1,19 @@
+<!-- src/app/clasificador/clasificador.component.html -->
+<div class="container">
+  <h2>Clasificador</h2>
+  <form (ngSubmit)="enviarDatos()">
+    <div class="form-group">
+      <label for="valorX">Valor X:</label>
+      <input type="number" id="valorX" [(ngModel)]="valorX" name="valorX" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="valorY">Valor Y:</label>
+      <input type="number" id="valorY" [(ngModel)]="valorY" name="valorY" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+  <div *ngIf="resultado">
+    <h3>Resultado:</h3>
+    <pre>{{ resultado | json }}</pre>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="titulo">
+  <h1>Medicamentos</h1>
+</div>
+<div class="pantalla">
+  <div class="card">
+    <img class="imgPantalla" [src]="imagenUrl" alt="Imagen de medicamento">
+    <div class="card-body">
+      <h1 class="card-title">ID: {{ id }}</h1>
+      <p class="card-text">Nombre: {{ nombre }}</p>
+      <p class="card-text">URL: {{ url }}</p>
+      <button class="btn-actualizar" (click)="irAHome()">Home</button>
+    </div>
+  </div>
+</div>

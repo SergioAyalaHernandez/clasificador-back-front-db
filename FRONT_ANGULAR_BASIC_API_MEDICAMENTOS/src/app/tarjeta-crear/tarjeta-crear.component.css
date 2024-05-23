@@ -1,0 +1,76 @@
+.titulo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 2%;
+}
+
+.pantalla {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding-top: 5%;
+}
+
+.card {
+  font-size: 16px; /* Reducir tamaño de fuente */
+  max-width: 100%; /* Hacer la tarjeta responsive */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.imgPantalla{
+  max-width: 100px;
+  max-height: 500px;
+}
+
+.card .card-text input {
+  font-size: 18px; /* Tamaño de fuente para los campos de texto */
+  padding: 5px; /* Espacio interno alrededor del texto */
+  width: 100%; /* Ancho completo del contenedor */
+}
+
+.card .btn-actualizar {
+  margin-top: 10px;
+}
+
+.btn-actualizar {
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  font-size: 20px; /* Reducir tamaño de fuente del botón */
+  min-width: 150px;
+  padding: 10px; /* Aumentar espacio del botón */
+  cursor: pointer;
+  background-color: #3af603;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .card {
+    font-size: 14px; /* Reducir tamaño de fuente para pantallas pequeñas */
+    padding: 8px; /* Reducir espacio dentro de la tarjeta */
+  }
+
+  .btn-actualizar {
+    font-size: 16px; /* Reducir tamaño de fuente del botón para pantallas pequeñas */
+    padding: 8px; /* Aumentar espacio del botón para pantallas pequeñas */
+  }
+}

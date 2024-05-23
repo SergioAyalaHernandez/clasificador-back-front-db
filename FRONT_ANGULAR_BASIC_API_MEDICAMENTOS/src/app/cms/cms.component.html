@@ -1,0 +1,27 @@
+<div class="titulo">
+  <h1>Medicamentos</h1>
+</div>
+<div class="completo">
+  <table>
+    <thead>
+    <tr class="titulos">
+      <th>ID</th>
+      <th>Nombre</th>
+      <th class="url-column">URL</th>
+      <th class="botones">Botones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let medicamento of registros">
+      <td (click)="recargarPagina(medicamento.idMedicamento)">{{ medicamento.idMedicamento }}</td>
+      <td (click)="recargarPagina(medicamento.idMedicamento)">{{ medicamento.nombreMedicamento}}</td>
+      <td class="url-column" (click)="recargarPagina(medicamento.idMedicamento)">{{ medicamento.url }}</td>
+      <td class="botones">
+        <button class="btn-actualizar" (click)="actualizarPagina(medicamento.idMedicamento)">Actualizar</button>
+        <button class="btn-eliminar" (click)="eliminarRegistro(medicamento.idMedicamento)">Eliminar</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <button class="btn-Crear" (click)="irAHome()" >Crear</button>
+</div>

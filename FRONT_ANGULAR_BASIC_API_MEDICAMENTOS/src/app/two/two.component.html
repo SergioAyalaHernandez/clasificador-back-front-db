@@ -1,0 +1,20 @@
+<div *ngIf="registros && registros.length > 0">
+  <table class="styled-table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>X</th>
+      <th>Y</th>
+      <th>Observación</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let registro of registros">
+      <td>{{ registro.idTablaA }}</td>
+      <td>{{ registro.x }}</td>
+      <td>{{ registro.y }}</td>
+      <td>{{ registro.observacion }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

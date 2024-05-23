@@ -1,0 +1,14 @@
+<div class="titulo">
+  <h1>Medicamentos</h1>
+</div>
+<div class="pantalla">
+  <div class="card">
+    <img class="imgPantalla" [src]="imagenUrl" alt="Imagen de medicamento">
+    <div class="card-body">
+      <input type="text" [(ngModel)]="nombreMedicamento" placeholder="Nombre del medicamento">
+      <input type="text" [(ngModel)]="url" placeholder="URL del medicamento" (blur)="validarUrl()">
+      <button class="btn-actualizar" (click)="agregarRegistro()">Agregar</button>
+    </div>
+  </div>
+</div>
+
