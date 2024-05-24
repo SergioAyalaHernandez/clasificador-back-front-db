@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('DESCARGAR REPOSITORIO') {
             steps {
                 echo 'Checking out the repository'
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'tesis2finalEsteSi', url: 'https://github.com/SergioAyalaHernandez/clasificador-back-front-db']])
             }
         }
-        stage('Build Docker Image') {
+        stage('Build Docker Image del repositorio') {
             steps {
                 echo 'Building Docker image'
                 script {
@@ -38,7 +38,6 @@ pipeline {
                     bat """
                     docker-compose -f ${env.WORKSPACE}/docker-compose.yml up -d
                     """
-                    // Verificar si el contenedor de MySQL está en ejecución
                     def containerStatus = bat(script: 'docker ps -f "name=pipeline-java-docker-db-1" --format "{{.Status}}"', returnStdout: true).trim()
                     if (containerStatus.contains("Up")) {
                         echo "MySQL container is running. Proceeding with data insertion."
@@ -60,6 +59,9 @@ pipeline {
         }
         success {
             echo 'Pipeline completed successfully'
+            script {
+                bat "docker-compose -f ${composeFile} up -d"
+            }
         }
         failure {
             echo 'Pipeline failed'
