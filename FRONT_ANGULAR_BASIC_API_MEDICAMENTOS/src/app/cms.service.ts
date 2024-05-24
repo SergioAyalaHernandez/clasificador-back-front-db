@@ -39,14 +39,14 @@ export class CmsService {
 
 
   getRegistrosTwo(): Observable<any> {
-    return this.http.get('http://localhost:8080/api/eucidiana/tablaA');
+    return this.http.get('http://localhost:8090/api/eucidiana/tablaA');
   }
 
-  private apiUrl = 'http://localhost:8080/clasificador/data';
+  private apiUrl = 'http://localhost:8090/clasificador/data';
 
   enviarValores(valorX: number, valorY: number): Observable<string> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers: headers, responseType: 'text' as 'json' };
-    return this.http.post<string>('http://localhost:8080/clasificador/data', { valorX, valorY }, options);
+    return this.http.post<string>('http://localhost:8090/clasificador/data', { valorX, valorY }, options);
   }
 }
