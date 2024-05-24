@@ -1,7 +1,7 @@
 FROM maven:3.8.4-openjdk-17 AS build
-RUN apt-get update && \
-    apt-get install -y maven && \
-    rm -rf /var/lib/apt/lists/*
+RUN powershell -Command Invoke-WebRequest -Uri "https://downloads.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip" -OutFile "maven.zip" ; \
+    Expand-Archive -Path "maven.zip" -DestinationPath "C:\\" ; \
+    Move-Item -Path "C:\\apache-maven-3.8.4" -Destination "C:\\maven"
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
